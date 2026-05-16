@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Arka plan - siyah kare -->
+  <rect width="64" height="64" rx="8" fill="#0a0a0a"/>
+  <!-- Tabela çerçevesi - altın -->
+  <rect x="8" y="16" width="48" height="32" rx="3" fill="none" stroke="#c8a96e" stroke-width="2.5"/>
+  <!-- Sol direk -->
+  <rect x="14" y="48" width="3" height="10" rx="1" fill="#c8a96e"/>
+  <!-- Sağ direk -->
+  <rect x="47" y="48" width="3" height="10" rx="1" fill="#c8a96e"/>
+  <!-- T harfi (Tabela) -->
+  <text x="32" y="38" font-family="Georgia, serif" font-size="20" font-weight="bold"
+        fill="#c8a96e" text-anchor="middle">T</text>
+</svg>

@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.fecirreklam.com.tr/sitemap.xml
+
+# Crawl-delay (isteğe bağlı - sunucu yükünü azaltır)
+Crawl-delay: 1
+
+# Gizlenmesi gereken dizin yok - tüm sayfalar açık
