@@ -960,13 +960,25 @@
     }
     .why-list li div span { font-size: 0.82rem; color: var(--silver); }
 
-    /* ===== GALLERY STRIP ===== */
-    .gallery-strip { background: var(--black); padding: clamp(2rem, 4vw, 4rem) 0; overflow: hidden; }
+    /* ===== GALLERY SLIDER ===== */
+    .gallery-strip { background: var(--black); padding: clamp(2rem, 4vw, 4rem) 0; }
     .gallery-strip .label { padding: 0 clamp(1.2rem, 4vw, 3rem); margin-bottom: 1.5rem; }
-    .gallery-row { display: flex; gap: 1px; }
+    .gallery-slider-wrap { position: relative; }
+    .gallery-row {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 0 clamp(1.2rem, 4vw, 3rem) 1rem;
+      cursor: grab;
+    }
+    .gallery-row:active { cursor: grabbing; }
+    .gallery-row::-webkit-scrollbar { display: none; }
     .gallery-ph {
-      flex: 0 0 280px;
-      height: 200px;
+      flex: 0 0 clamp(240px, 40vw, 360px);
+      height: clamp(180px, 28vw, 260px);
       background: var(--mid);
       border: 1px solid var(--border);
       display: flex;
@@ -982,6 +994,8 @@
       transition: background 0.3s;
       position: relative;
       overflow: hidden;
+      border-radius: 4px;
+      flex-shrink: 0;
     }
     .gallery-ph:hover { background: var(--dark); }
     .gallery-ph::before {
@@ -997,6 +1011,32 @@
       );
     }
     .gallery-ph .ph-icon { font-size: 1.8rem; color: var(--border); position: relative; z-index: 1; }
+    /* Slider ok butonları */
+    .gallery-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      background: rgba(10,10,10,0.85);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      border-radius: 2px;
+      transition: background 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .gallery-btn:hover { background: var(--gold); color: var(--black); }
+    .gallery-btn.prev { left: 4px; }
+    .gallery-btn.next { right: 4px; }
+    @media (max-width: 600px) {
+      .gallery-btn { width: 36px; height: 36px; font-size: 1rem; }
+    }
     .gallery-ph .ph-txt { position: relative; z-index: 1; }
 
     /* ===== TESTIMONIAL / TRUST ===== */
@@ -2090,47 +2130,51 @@
     <div class="container-fluid">
       <span class="label" style="display:block; padding:0 clamp(1.2rem,4vw,3rem); margin-bottom:1.5rem;">Projelerimizden</span>
     </div>
-    <div class="gallery-row">
-      <div class="gallery-ph">
-        <img src="resimler/galeri-1.webp" alt="Kutu Harf Tabela Projesi" onload="this.parentElement.classList.add('img-loaded')" onerror="this.style.display='none'" />
-        <span class="ph-icon">🖼️</span>
-        <span class="ph-txt">Kutu Harf Proje</span>
+    <div class="gallery-slider-wrap">
+      <button class="gallery-btn prev" onclick="slideGallery(-1)" aria-label="Önceki">&#8592;</button>
+      <div class="gallery-row" id="galleryRow">
+        <div class="gallery-ph">
+          <img src="resimler/galeri-1.webp" alt="Kutu Harf Tabela Projesi" onload="this.parentElement.classList.add('img-loaded')" onerror="this.style.display='none'" />
+          <span class="ph-icon">🖼️</span>
+          <span class="ph-txt">Kutu Harf Proje</span>
+        </div>
+        <div class="gallery-ph">
+          <img src="resimler/galeri-2.webp" alt="Araç Giydirme Projesi" onload="this.parentElement.classList.add('img-loaded')" onerror="this.style.display='none'" />
+          <span class="ph-icon">🖼️</span>
+          <span class="ph-txt">Araç Giydirme</span>
+        </div>
+        <div class="gallery-ph">
+          <img src="resimler/galeri-3.webp" alt="LED Tabela Projesi" onload="this.parentElement.classList.add('img-loaded')" onerror="this.style.display='none'" />
+          <span class="ph-icon">🖼️</span>
+          <span class="ph-txt">LED Tabela</span>
+        </div>
+        <div class="gallery-ph">
+          <img src="resimler/galeri-4.webp" alt="Şantiye Tabelası Projesi" onload="this.parentElement.classList.add('img-loaded')" onerror="this.style.display='none'" />
+          <span class="ph-icon">🖼️</span>
+          <span class="ph-txt">Şantiye Tabelası</span>
+        </div>
+        <div class="gallery-ph">
+          <img src="resimler/galeri-5.webp" alt="Fabrika Tabelası Projesi" onload="this.parentElement.classList.add('img-loaded')" onerror="this.style.display='none'" />
+          <span class="ph-icon">🖼️</span>
+          <span class="ph-txt">Fabrika Tabelası</span>
+        </div>
+        <div class="gallery-ph">
+          <img src="resimler/galeri-6.webp" alt="İç Mekan LED Box Projesi" onload="this.parentElement.classList.add('img-loaded')" onerror="this.style.display='none'" />
+          <span class="ph-icon">🖼️</span>
+          <span class="ph-txt">İç Mekan LED Box</span>
+        </div>
+        <div class="gallery-ph">
+          <img src="resimler/galeri-7.webp" alt="Çatı Tabelası Projesi" onload="this.parentElement.classList.add('img-loaded')" onerror="this.style.display='none'" />
+          <span class="ph-icon">🖼️</span>
+          <span class="ph-txt">Çatı Tabelası</span>
+        </div>
+        <div class="gallery-ph">
+          <img src="resimler/galeri-8.webp" alt="Cam Giydirme Projesi" onload="this.parentElement.classList.add('img-loaded')" onerror="this.style.display='none'" />
+          <span class="ph-icon">🖼️</span>
+          <span class="ph-txt">Cam Giydirme</span>
+        </div>
       </div>
-      <div class="gallery-ph">
-        <img src="resimler/galeri-2.webp" alt="Araç Giydirme Projesi" onload="this.parentElement.classList.add('img-loaded')" onerror="this.style.display='none'" />
-        <span class="ph-icon">🖼️</span>
-        <span class="ph-txt">Araç Giydirme</span>
-      </div>
-      <div class="gallery-ph">
-        <img src="resimler/galeri-3.webp" alt="LED Tabela Projesi" onload="this.parentElement.classList.add('img-loaded')" onerror="this.style.display='none'" />
-        <span class="ph-icon">🖼️</span>
-        <span class="ph-txt">LED Tabela</span>
-      </div>
-      <div class="gallery-ph">
-        <img src="resimler/galeri-4.webp" alt="Şantiye Tabelası Projesi" onload="this.parentElement.classList.add('img-loaded')" onerror="this.style.display='none'" />
-        <span class="ph-icon">🖼️</span>
-        <span class="ph-txt">Şantiye Tabelası</span>
-      </div>
-      <div class="gallery-ph">
-        <img src="resimler/galeri-5.webp" alt="Fabrika Tabelası Projesi" onload="this.parentElement.classList.add('img-loaded')" onerror="this.style.display='none'" />
-        <span class="ph-icon">🖼️</span>
-        <span class="ph-txt">Fabrika Tabelası</span>
-      </div>
-      <div class="gallery-ph">
-        <img src="resimler/galeri-6.webp" alt="İç Mekan LED Box Projesi" onload="this.parentElement.classList.add('img-loaded')" onerror="this.style.display='none'" />
-        <span class="ph-icon">🖼️</span>
-        <span class="ph-txt">İç Mekan LED Box</span>
-      </div>
-      <div class="gallery-ph">
-        <img src="resimler/galeri-7.webp" alt="Çatı Tabelası Projesi" onload="this.parentElement.classList.add('img-loaded')" onerror="this.style.display='none'" />
-        <span class="ph-icon">🖼️</span>
-        <span class="ph-txt">Çatı Tabelası</span>
-      </div>
-      <div class="gallery-ph">
-        <img src="resimler/galeri-8.webp" alt="Cam Giydirme Projesi" onload="this.parentElement.classList.add('img-loaded')" onerror="this.style.display='none'" />
-        <span class="ph-icon">🖼️</span>
-        <span class="ph-txt">Cam Giydirme</span>
-      </div>
+      <button class="gallery-btn next" onclick="slideGallery(1)" aria-label="Sonraki">&#8594;</button>
     </div>
   </section>
 
@@ -2393,6 +2437,35 @@
       document.querySelectorAll('.faq-icon').forEach(i => i.textContent = '+');
       if (!isOpen) { answer.style.display = 'block'; icon.textContent = '−'; }
     }
+
+    // ===== GALLERY SLIDER =====
+    function slideGallery(dir) {
+      const row = document.getElementById('galleryRow');
+      const card = row.querySelector('.gallery-ph');
+      const scrollAmt = (card.offsetWidth + 12) * 2;
+      row.scrollBy({ left: dir * scrollAmt, behavior: 'smooth' });
+    }
+
+    // Mouse drag to scroll (PC)
+    (function() {
+      const row = document.getElementById('galleryRow');
+      if (!row) return;
+      let isDown = false, startX, scrollLeft;
+      row.addEventListener('mousedown', e => {
+        isDown = true;
+        row.classList.add('active');
+        startX = e.pageX - row.offsetLeft;
+        scrollLeft = row.scrollLeft;
+      });
+      row.addEventListener('mouseleave', () => { isDown = false; row.classList.remove('active'); });
+      row.addEventListener('mouseup', () => { isDown = false; row.classList.remove('active'); });
+      row.addEventListener('mousemove', e => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - row.offsetLeft;
+        row.scrollLeft = scrollLeft - (x - startX);
+      });
+    })();
 
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(a => {
